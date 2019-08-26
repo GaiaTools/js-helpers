@@ -1,0 +1,19 @@
+{
+  "name": "js-helpers",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/KnightYoshi/js-helpers.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "UNLICENSED",
+  "homepage": "https://bitbucket.org/KnightYoshi/js-helpers#readme",
+  "dependencies": {
+    "locutus": "^2.0.11"
+  }
+}
