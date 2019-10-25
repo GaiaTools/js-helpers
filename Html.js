@@ -407,7 +407,7 @@ module.exports = class Html {
 	 * @param {HTMLElement|HTMLElement[]|DocumentFragment|string} content - The content used to populate the element
 	 */
 	static renderContent(element, content) {
-		if(Array.isArray(content)) {
+		if(Array.isArray(content) || content instanceof NodeList) {
 			for(let childElement of content) {
 				element.appendChild(childElement);
 			}
