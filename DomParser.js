@@ -1,4 +1,8 @@
 module.exports = class DomParser {
+	static get parser() {
+		return new DOMParser;
+	}
+
 	/**
 	 * This converts a source document string into a DOM object
 	 * 
@@ -8,7 +12,7 @@ module.exports = class DomParser {
 	 * @returns {HTMLDocument|XMLDocument} - The document returned is either an HTML, SVG, or XML document
 	 */
 	static parse(source, type = 'text/html') {
-		return new DOMParser().parseFromString(source, type);
+		return this.parser.parseFromString(source, type);
 	}
 
 	/**
@@ -18,7 +22,7 @@ module.exports = class DomParser {
 	 * @returns {Object} - The HTML body element
 	 */
 	static htmlBody(source) {
-		return this.getDocument(source).body;
+		return this.parse(source).body;
 	}
 
 	/**
