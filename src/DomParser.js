@@ -1,4 +1,4 @@
-module.exports = class DomParser {
+export default class DomParser {
 	static get parser() {
 		return new DOMParser;
 	}
@@ -9,7 +9,7 @@ module.exports = class DomParser {
 	 * @see You can read more about the {@link https://developer.mozilla.org/en-US/docs/Web/API/DOMParser |DOMParser} from the MDN
 	 * @param {string} source - The source document
 	 * @param {string} type - The MIME type of the source document 
-	 * @returns {HTMLDocument|XMLDocument} - The document returned is either an HTML, SVG, or XML document
+	 * @returns {Document} - The document returned is either an HTML, SVG, or XML document
 	 */
 	static parse(source, type = 'text/html') {
 		return this.parser.parseFromString(source, type);
@@ -34,4 +34,4 @@ module.exports = class DomParser {
 	static getNodes(source) {
 		return this.parse(source).body.childNodes;
 	}
-};
+}
