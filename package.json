@@ -1,10 +1,10 @@
 {
   "name": "js-helpers",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "",
   "module": "src/indexjs",
   "scripts": {
-    "prepare": "npm run prod",
+    "postinstall": "npm run prod",
     "watch": "webpack --watch --progress --mode development --env.browsers",
     "dev": "webpack --progress --hide-modules --mode production",
     "prod": "webpack --no-progress --hide-modules --mode production"

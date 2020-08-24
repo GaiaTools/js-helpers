@@ -1,2 +1,5 @@
+# v1.1.1 (August 23, 2020)
+* Change package prepare to postinstall
+
 # v1.1.0 (August 23, 2020)
 * Use Webpack to build prod package on install
