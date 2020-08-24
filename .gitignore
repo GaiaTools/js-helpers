@@ -353,3 +353,5 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/node,sass,sonar,linux,macos,maven,windows,eclipse,phpstorm,sonarqube,visualstudiocode
+
+dist/
