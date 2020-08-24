@@ -2,8 +2,12 @@
   "name": "js-helpers",
   "version": "1.0.1",
   "description": "",
+  "module": "src/indexjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepare": "npm run prod",
+    "watch": "webpack --watch --progress --mode development --env.browsers",
+    "dev": "webpack --progress --hide-modules --mode production",
+    "prod": "webpack --no-progress --hide-modules --mode production"
   },
   "repository": {
     "type": "git",
@@ -15,5 +19,18 @@
   "homepage": "https://bitbucket.org/KnightYoshi/js-helpers#readme",
   "dependencies": {
     "locutus": "^2.0.11"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.4",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.10.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
+    "@babel/plugin-transform-destructuring": "^7.10.4",
+    "@babel/plugin-transform-modules-commonjs": "^7.10.4",
+    "@babel/register": "^7.10.5",
+    "babel-loader": "^8.1.0",
+    "webpack": "^4.44.1",
+    "webpack-bundle-analyzer": "^3.8.0",
+    "webpack-cli": "^3.3.12"
   }
 }
