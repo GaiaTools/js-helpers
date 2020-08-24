@@ -47,7 +47,7 @@ let emptyElements = [
  */
 let booleanAttributes = ['required', 'readonly', 'disabled', 'checked'];
 
-module.exports = class Html {
+export default class Html {
 	/**
 	 * Encode HTML characters
 	 * 
@@ -738,4 +738,4 @@ module.exports = class Html {
 	static removeClass(element, classList) {
 		element.classList.remove(...classList);
 	}
-};
+}
