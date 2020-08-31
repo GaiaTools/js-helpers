@@ -1,3 +1,6 @@
+# v1.1.2 (August 30, 2020)
+* Hotfix for not finding the extension
+
 # v1.1.1 (August 23, 2020)
 * Change package prepare to postinstall
 
