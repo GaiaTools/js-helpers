@@ -1,4 +1,4 @@
-export default class DomParser {
+module.exports = class DomParser {
 	static get parser() {
 		return new DOMParser;
 	}
