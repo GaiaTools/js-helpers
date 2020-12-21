@@ -1,4 +1,4 @@
-import path from 'path';
+const path = reuqire('path');
 
 export default {
 	entry: path.resolve(__dirname, 'src/index.js'),
