@@ -1,6 +1,6 @@
 const path = reuqire('path');
 
-export default {
+module.exports = {
 	entry: path.resolve(__dirname, 'src/index.js'),
 	output: {
 		filename: 'jsHelpers.js',
