@@ -6,8 +6,8 @@
   "scripts": {
     "postinstall": "npm run prod",
     "watch": "webpack --watch --mode development --env.browsers",
-    "dev": "webpack --hide-modules --mode production",
-    "prod": "webpack --hide-modules --mode production"
+    "dev": "webpack --mode production",
+    "prod": "webpack --mode production"
   },
   "repository": {
     "type": "git",
