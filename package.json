@@ -5,9 +5,9 @@
   "module": "dist/jsHelpers.js",
   "scripts": {
     "postinstall": "npm run prod",
-    "watch": "webpack --config webpack.babel.js --watch --mode development --env.browsers",
-    "dev": "webpack --config webpack.babel.js --mode production",
-    "prod": "webpack --config webpack.babel.js --mode production"
+    "watch": "webpack --config ./webpack.babel.js --watch --mode development --env.browsers",
+    "dev": "webpack --config ./webpack.babel.js --mode production",
+    "prod": "webpack --config ./webpack.babel.js --mode production"
   },
   "repository": {
     "type": "git",
