@@ -5,9 +5,9 @@
   "module": "dist/jsHelpers.js",
   "scripts": {
     "postinstall": "npm run prod",
-    "watch": "webpack --watch --mode development --env.browsers",
-    "dev": "webpack --mode production",
-    "prod": "webpack --mode production"
+    "watch": "webpack --config webpack.babel.js --watch --mode development --env.browsers",
+    "dev": "webpack --config webpack.babel.js --mode production",
+    "prod": "webpack --config webpack.babel.js --mode production"
   },
   "repository": {
     "type": "git",
@@ -18,19 +18,19 @@
   "license": "UNLICENSED",
   "homepage": "https://bitbucket.org/KnightYoshi/js-helpers#readme",
   "dependencies": {
-    "locutus": "^2.0.11"
+    "locutus": "^2.0.16"
   },
   "devDependencies": {
-    "@babel/core": "^7.11.4",
-    "@babel/plugin-proposal-class-properties": "^7.10.4",
-    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.10.4",
-    "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
-    "@babel/plugin-transform-destructuring": "^7.10.4",
-    "@babel/plugin-transform-modules-commonjs": "^7.10.4",
-    "@babel/register": "^7.10.5",
-    "babel-loader": "^8.1.0",
-    "webpack": "^4.44.1",
-    "webpack-bundle-analyzer": "^3.8.0",
-    "webpack-cli": "^3.3.12"
+    "@babel/core": "^7.19.3",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.18.6",
+    "@babel/plugin-proposal-object-rest-spread": "^7.18.9",
+    "@babel/plugin-transform-destructuring": "^7.18.13",
+    "@babel/plugin-transform-modules-commonjs": "^7.18.6",
+    "@babel/register": "^7.18.9",
+    "babel-loader": "^8.2.5",
+    "webpack": "^5.74.0",
+    "webpack-bundle-analyzer": "^4.6.1",
+    "webpack-cli": "^4.10.0"
   }
 }
