@@ -4,17 +4,25 @@ module.exports = {
 	entry: path.resolve(__dirname, 'src/index.js'),
 	output: {
 		filename: 'jsHelpers.js',
-		library: "jsHelpers",
-		libraryTarget: 'umd'
+		library: {
+			name: 'jsHelpers',
+			type: 'umd'
+		},
 	},
 	module: {
 		rules: [
 			{
 				test: /\.js$/,
 				use: [
-					{loader: 'babel-loader'}
-				]
-			}
+					{
+						loader: 'babel-loader',
+						options: {
+							compact: true,
+							comments: false,
+						},
+					},
+				],
+			},
 		]
 	}
 }
