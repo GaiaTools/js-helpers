@@ -3,9 +3,8 @@ import {
 	encodeHTML
 } from 'entities';
 import {isEmpty} from 'lodash';
-
-let ObjectHelper = require('./ObjectHelper');
-let DomParser = require('./DomParser');
+import {ObjectHelper} from './ObjectHelper';
+import {DomParser} from './DomParser';
 
 /**
  * @callback itemCallback
