@@ -15,7 +15,8 @@
   "license": "UNLICENSED",
   "homepage": "https://bitbucket.org/KnightYoshi/js-helpers#readme",
   "dependencies": {
-    "locutus": "^2.0.16"
+    "entities": "^4.5.0",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@babel/core": "^7.22.9",

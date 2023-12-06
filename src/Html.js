@@ -1,6 +1,9 @@
-let htmlspecialchars = require('locutus/php/strings/htmlspecialchars');
-let html_entity_decode = require('locutus/php/strings/html_entity_decode');
-let empty = require('locutus/php/var/empty');
+import {
+	decodeHTML,
+	encodeHTML
+} from 'entities';
+import {isEmpty} from 'lodash';
+
 let ObjectHelper = require('./ObjectHelper');
 let DomParser = require('./DomParser');
 
@@ -55,7 +58,7 @@ export class Html {
 	 * @param {boolean} doubleEncode - Whether to double encode
 	 */
 	static encode(content, doubleEncode = true) {
-		return htmlspecialchars(content, 'ENT_QUOTES', null, doubleEncode);
+		return encodeHTML(content);
 	}
 
 	/**
@@ -65,7 +68,7 @@ export class Html {
 	 * @returns {string} - The decoded string
 	 */
 	static decode(content) {
-		return html_entity_decode(content, 'ENT_QUOTES');
+		return decodeHTML(content);
 	}
 
 	/**
@@ -624,7 +627,7 @@ export class Html {
 		let separator = DomParser.getNodes(ObjectHelper.remove(options, 'separator', '\n')).item(0);
 		let itemOptions = ObjectHelper.remove(options, 'itemOptions', {});
 		
-		if(empty(items)) {
+		if(isEmpty(items)) {
 			return this.tag(tag, '', options);
 		}
 
