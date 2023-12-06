@@ -1,4 +1,4 @@
-module.exports = class DomParser {
+export class DomParser {
 	static get parser() {
 		return new DOMParser;
 	}

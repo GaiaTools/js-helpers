@@ -1,6 +1,4 @@
-// let InvalidArgumentError = require('../errors/InvalidArgumentError');
-
-module.exports = class ObjectHelper {
+export class ObjectHelper {
 
 	/**
      * Test if something is an object

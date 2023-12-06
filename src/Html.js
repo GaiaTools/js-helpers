@@ -47,7 +47,7 @@ let emptyElements = [
  */
 let booleanAttributes = ['required', 'readonly', 'disabled', 'checked'];
 
-module.exports = class Html {
+export class Html {
 	/**
 	 * Encode HTML characters
 	 * 
