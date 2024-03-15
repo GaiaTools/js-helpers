@@ -226,7 +226,7 @@ export class Html {
 	 * @param {Object} options - A name/value list of attributes to add to the element
 	 * @returns {HTMLElement} - A generated input field
 	 */
-	static butonInput(label = 'Button', options = {}) {
+	static buttonInput(label = 'Button', options = {}) {
 		options.type = 'button';
 		options.value = label;
 
