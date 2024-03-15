@@ -12,9 +12,9 @@ export class ObjectHelper {
      * @returns {boolean} - True or false whether the type item is an object
      */
 	static isObject(item) {
-		return (item && typeof item === 'object' && !Array.isArray(item));
+		return item !== null && typeof item === 'object' && !Array.isArray(item) && typeof item !== 'function';
 	}
-    
+
 	/**
      * Deep merge two objects it modifies the first object passed with following arguments and returns the modified object as well
      * 
