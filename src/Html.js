@@ -443,7 +443,7 @@ export class Html {
 			const label = options.label;
 			const labelOptions = options.labelOptions ? options.labelOptions : {};
 			delete options.label;
-			return this.label([this.input(type, name, value, options), this.text(label)], null, labelOptions);
+			return this.label([this.input(type, name, value, options), this.text(label)], '', labelOptions);
 		}
 
 		fragment.appendChild(this.input(type, name, value, options));
