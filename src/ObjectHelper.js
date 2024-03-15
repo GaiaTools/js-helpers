@@ -75,14 +75,4 @@ export class ObjectHelper {
 	static count(item) {
 		return Object.keys(item).length;
 	}
-
-	/**
-	 *
-	 * @param {Object} target - the target object to instaniate
-	 * @param {Object} config - the config value to pass to the new object
-	 * @returns {*} - the instantiated object
-	 */
-	static createObject(target, config = {}) {
-		return new target(config);
-	}
 }
