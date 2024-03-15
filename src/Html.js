@@ -270,7 +270,7 @@ export class Html {
 	 * @returns {HTMLElement} - A generated input field
 	 */
 	static textInput(name, value = null, options = {}) {
-		return this.input('text', value, options);
+		return this.input('text', name, value, options);
 	}
 
 	/**
@@ -294,7 +294,7 @@ export class Html {
 	 * @returns {HTMLElement} - A generated input field
 	 */
 	static passwordInput(name, value = null, options = {}) {
-		return this.input('password', value, options);
+		return this.input('password', name, value, options);
 	}
 
 	/**
@@ -306,7 +306,7 @@ export class Html {
 	 * @returns {HTMLElement} - A generated input field
 	 */
 	static fileInput(name, value = null, options = {}) {
-		return this.input('file', value, options);
+		return this.input('file', name, value, options);
 	}
 
 	/**
