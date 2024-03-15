@@ -67,10 +67,10 @@ export function tag(name, content, options = {}) {
  * This is a shortcut to generate an anchor element
  *
  * @example
- * // returns an element object of an anchor <a href="http://example.com">Example</a>
+ * returns an element object of an anchor <a href="http://example.com">Example</a>
  * a('Example', 'http://example.com');
  * @example
- * // returns an element object of an anchor <a class="button">Click Me</a>
+ * returns an element object of an anchor <a class="button">Click Me</a>
  * a('Click Me', null, {'class': 'button'});
  *
  * @param {string} text - The anchor text content
@@ -334,6 +334,7 @@ export function checkbox(name, checked = false, options = {}) {
  * @param {string} name - The name attribute of the input element
  * @param {boolean} checked - The checked state of the input element
  * @param {Object} options - A name/value list of attributes to add to the element
+ * @param {string} options.value - The value of the input element. Defaults to '1'.
  * @param {string} options.uncheck - A value for the unchecked state of a checkbox value. This will generate a hidden input with the value of this property.
  * @param {string} options.label - A label displayed next to the checkbox that is not HTML-encoded. The label wraps around the checkbox.
  * @param {string} options.labelOptions - An array of HTML attributes for the label tag.
@@ -351,11 +352,10 @@ export function booleanInput(type, name, checked = false, options = {}) {
 		labelEl.appendChild(element);
 		const textNode = document.createTextNode(options.label);
 		labelEl.appendChild(textNode);
-		// Apply label options if any
 		if (options.labelOptions) {
 			setAttributes(labelEl, options.labelOptions);
 		}
-		element = labelEl; // Wrap the input in the label
+		element = labelEl;
 	}
 
 	return element;
@@ -447,7 +447,6 @@ export function renderSelectOptions(selection, items, options = {}) {
 			optionElement.selected = true;
 		}
 
-		// Apply any additional option-specific attributes if provided
 		if (options[value]) {
 			setAttributes(optionElement, options[value]);
 		}
@@ -482,18 +481,16 @@ export function checkboxList(name, selection = null, items = {}, options = {}) {
 		const checkboxEl = checkbox(name, isChecked, {
 			value,
 			label,
-			...options.itemOptions, // Assume there's an options processing function if needed
+			...options.itemOptions,
 		});
 		fragment.appendChild(checkboxEl);
 
-		// Optionally add a separator if specified
 		if (options.separator && index < Object.keys(items).length - 1) {
 			const separatorText = document.createTextNode(options.separator);
 			fragment.appendChild(separatorText);
 		}
 	});
 
-	// Unselect hidden input if necessary
 	if (options.unselect !== undefined) {
 		fragment.prepend(hiddenInput(name, options.unselect));
 	}
@@ -572,7 +569,7 @@ export function ul(items, options = {}) {
  * @returns {HTMLElement} - The generated list
  */
 export function ol(items, options = {}) {
-	options.tag = 'ol'; // Force tag to 'ol' for ordered lists
+	options.tag = 'ol';
 	return ul(items, options);
 }
 
