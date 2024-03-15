@@ -25,7 +25,7 @@ import {DomParser} from './DomParser';
 /**
  * @var {Array} - A list of elements that do not allow for inner HTML
  */
-let voidElements = [
+const voidElements = [
 	'area',
 	'base',
 	'br',
@@ -47,7 +47,7 @@ let voidElements = [
 /**
  * @var {Array} - A list of boolean attributes
  */
-let booleanAttributes = ['required', 'readonly', 'disabled', 'checked'];
+const booleanAttributes = ['required', 'readonly', 'disabled', 'checked'];
 
 export class Html {
 	/**
@@ -81,7 +81,7 @@ export class Html {
 	 * @see setAttributes
 	 */
 	static tag(name, content, options = {}) {
-		let element = document.createElement(name);
+		const element = document.createElement(name);
 		this.setAttributes(element, options);
 		if(!voidElements.includes(name)) {
 			this.renderContent(element, content);
@@ -136,23 +136,13 @@ export class Html {
 	 * @param {*} options - A name/value list of attributes to add to the element
 	 */
 	static form(action = '', method = 'post', options = {}) {
-		let hiddenInputs = new DocumentFragment;
-		
-		let queryParamPos = action.indexOf('?');
-		if(method === 'get' && queryParamPos > 0) {
-			let queryParams = action.substring(queryParamPos + 1).split('&');
-			for(let param of queryParams) {
-				let separatorPos = param.indexOf('=');
-				if(separatorPos > 0) {
-					// substr is inclusive, substring is exclusive use substring to exclude the = from the value
-					hiddenInputs.appendChild(this.hiddenInput(
-						decodeURIComponent(param.substr(0, separatorPos)),
-						decodeURIComponent(param.substr(separatorPos + 1))
-					));
-				}
-				else {
-					hiddenInputs.appendChild(this.hiddenInput(decodeURIComponent(param), ''));
-				}
+		const hiddenInputs = new DocumentFragment;
+		const queryParamPos = action.indexOf('?');
+		if(method.toLowerCase() === 'get' && queryParamPos !== -1) {
+			const queryParams = new URLSearchParams(action.substring(queryParamPos + 1));
+			for(const [key, value] of queryParams) {
+				const hiddenInput = this.hiddenInput(decodeURIComponent(key), decodeURIComponent(value));
+				hiddenInputs.appendChild(hiddenInput);
 			}
 			action = action.substr(0, queryParamPos);
 		}
@@ -376,12 +366,12 @@ export class Html {
 	 */
 	static booleanInput(type, name, checked = false, options = {}) {
 		options.checked = checked;
-		let fragment = new DocumentFragment;
+		const fragment = new DocumentFragment;
 		
-		let value = options.value ? options.value : 1;
+		const value = options.value ? options.value : 1;
 
 		if(options.uncheck) {
-			let hiddenOptions = {};
+			const hiddenOptions = {};
 			if(options.form) {
 				hiddenOptions.form = options.form;
 			}
@@ -390,8 +380,8 @@ export class Html {
 		}
 
 		if(options.label) {
-			let label = options.label;
-			let labelOptions = options.labelOptions ? options.labelOptions : {};
+			const label = options.label;
+			const labelOptions = options.labelOptions ? options.labelOptions : {};
 			delete options.label;
 			return this.label([this.input(type, name, value, options), this.text(label)], null, labelOptions);
 		}
@@ -410,7 +400,7 @@ export class Html {
 	 */
 	static renderContent(element, content) {
 		if(Array.isArray(content) || content instanceof NodeList) {
-			for(let childElement of content) {
+			for(const childElement of content) {
 				element.appendChild(childElement);
 			}
 		}
@@ -438,7 +428,7 @@ export class Html {
 
 		options.name = name;
 		delete options.unselect;
-		let selectOptions = this.renderSelectOptions(selection, items, options);
+		const selectOptions = this.renderSelectOptions(selection, items, options);
 		return this.tag('select', selectOptions, options);
 	}
 
@@ -452,7 +442,7 @@ export class Html {
 	 * @returns {DocumentFragment} - The generated select box
 	 */
 	static listBox(name, selection = null, items = {}, options = {}) {
-		let fragment = new DocumentFragment;
+		const fragment = new DocumentFragment;
 		if(!options.size) {
 			options.size = 4;
 		}
@@ -470,7 +460,7 @@ export class Html {
 			delete options.unselect;
 		}
 
-		let selectOptions = this.renderSelectOptions(selection, items, options);
+		const selectOptions = this.renderSelectOptions(selection, items, options);
 		fragment.appendChild(this.tag('select', selectOptions, options));
 		return fragment;
 	}
@@ -620,20 +610,20 @@ export class Html {
 	 * @param {listCallback} options.item - A callback that's used to customize the list item.
 	 */
 	static ul(items, options = {}) {
-		let tag = ObjectHelper.remove(options, 'tag', 'ul');
-		let encode = ObjectHelper.remove(options, 'encode', true);
-		let formatter = ObjectHelper.remove(options, 'item');
-		let separator = DomParser.getNodes(ObjectHelper.remove(options, 'separator', '\n')).item(0);
-		let itemOptions = ObjectHelper.remove(options, 'itemOptions', {});
+		const tag = ObjectHelper.remove(options, 'tag', 'ul');
+		const encode = ObjectHelper.remove(options, 'encode', true);
+		const formatter = ObjectHelper.remove(options, 'item');
+		const separator = DomParser.getNodes(ObjectHelper.remove(options, 'separator', '\n')).item(0);
+		const itemOptions = ObjectHelper.remove(options, 'itemOptions', {});
 		
 		if(isEmpty(items)) {
 			return this.tag(tag, '', options);
 		}
 
-		let fragment = new DocumentFragment;
+		const fragment = new DocumentFragment;
 
-		for(let idx in items) {
-			let item = items[idx];
+		for(const idx in items) {
+			const item = items[idx];
 			if(formatter !== null) {
 				fragment.appendChild(formatter(item, idx));
 			}
