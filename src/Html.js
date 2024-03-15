@@ -699,44 +699,30 @@ export class Html {
 	 * @param {Object} attributes - A name/value list of attributes to add to the element
 	 */
 	static setAttributes(element, attributes = {}) {
-		if(typeof element !== 'object' || typeof attributes !== 'object') {
-			return;
-		}
-	
-		for(let name in attributes) {
-			let value = attributes[name];
-	
-			// name must be a string
-			if(Number(name)) {
-				continue;
-			}
+		if (typeof element !== 'object' || typeof attributes !== 'object') return;
 
-			if(typeof value === 'boolean' && booleanAttributes.includes(name)) {
-				if(value) {
-					element[name] = true;
-					continue;
-				}
+		Object.entries(attributes).forEach(([name, value]) => {
+			if (value === null || value === false) return;
+
+			if (booleanAttributes.includes(name)) {
+				// Directly set property for boolean attributes, allowing for true/false toggling
+				element[name] = !!value; // Ensures the value is treated as a boolean
+			} else if (name === 'class' && Array.isArray(value)) {
+				// Join array values into a space-separated string for class names
+				element.className = value.join(' ');
+			} else if (name === 'style' && typeof value === 'object') {
+				// Apply styles object directly to element.style
+				Object.assign(element.style, value);
+			} else if (name.startsWith('data') && typeof value === 'object') {
+				// Handle data-* attributes with object syntax
+				Object.entries(value).forEach(([dataKey, dataValue]) => {
+					element.dataset[dataKey] = dataValue;
+				});
+			} else {
+				// Default to setAttribute for everything else
+				element.setAttribute(name, value.toString());
 			}
-			else if(value && typeof value === 'object') {
-				if(name === 'class' && Array.isArray(value)) {
-					element.className = value.join(' ');
-				}
-				else if(name === 'data') {
-					for(let name in value ) {
-						let value = value[name];
-						if(value === true) {
-							element.dataset[name] = '';
-						}
-						else if(value !== '') {
-							element.dataset[name] = value;
-						}
-					}
-				}
-			}
-			else if(value !== '') {
-				element.setAttribute(name, value);
-			}
-		}
+		});
 	}
 
 	/**
