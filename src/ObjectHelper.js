@@ -59,11 +59,10 @@ export class ObjectHelper {
 	 * @param {string|null} defaultValue - The default value to be returned if the property does not exist
 	 * @returns {*|null} - The value of the property, or the default value
 	 */
-	static remove(target, property, defaultValue = null) {
-		if(this.isObject(target) && target.hasOwnProperty(property)) {
-			let value = target[property];
+	static remove(target, property, defaultValue = undefined) {
+		if (this.isObject(target) && Object.hasOwnProperty.call(target, property)) {
+			const value = target[property];
 			delete target[property];
-			
 			return value;
 		}
 		return defaultValue;
