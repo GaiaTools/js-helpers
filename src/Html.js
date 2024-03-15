@@ -265,7 +265,7 @@ export class Html {
 	 * Generates a text input field
 	 * 
 	 * @param {string} name - The value of the name attribute
-	 * @param {string} value - The value of the input field
+	 * @param {string|null} value - The value of the input field
 	 * @param {Object} options - A name/value list of attributes to add to the element
 	 * @returns {HTMLElement} - A generated input field
 	 */
@@ -277,7 +277,7 @@ export class Html {
 	 * Generates a hidden input field
 	 * 
 	 * @param {string} name - The value of the name attribute
-	 * @param {string} value - The value of the input field
+	 * @param {string|null} value - The value of the input field
 	 * @param {Object} options - A name/value list of attributes to add to the element
 	 * @returns {HTMLElement} - A generated input field
 	 */
@@ -289,7 +289,7 @@ export class Html {
 	 * Generates a password input field
 	 * 
 	 * @param {string} name - The value of the name attribute
-	 * @param {string} value - The value of the input field
+	 * @param {string|null} value - The value of the input field
 	 * @param {Object} options - A name/value list of attributes to add to the element
 	 * @returns {HTMLElement} - A generated input field
 	 */
@@ -301,7 +301,7 @@ export class Html {
 	 * Generates a file input field
 	 * 
 	 * @param {string} name - The value of the name attribute
-	 * @param {string} value - The value of the input field
+	 * @param {string|null} value - The value of the input field
 	 * @param {Object} options - A name/value list of attributes to add to the element
 	 * @returns {HTMLElement} - A generated input field
 	 */
