@@ -143,7 +143,7 @@ export class Html {
 				const hiddenInput = this.hiddenInput(decodeURIComponent(key), decodeURIComponent(value));
 				hiddenInputs.appendChild(hiddenInput);
 			}
-			action = action.substr(0, queryParamPos);
+			action = action.substring(0, queryParamPos);
 		}
 
 		options.action = action;
@@ -446,14 +446,14 @@ export class Html {
 			options.size = 4;
 		}
 
-		if(options.multiple && name && name.substr(-2, 2) === '[]') {
+		if(options.multiple && name && name.includes('[]')) {
 			name += '[]';
 		}
 		
 		options.name = name;
 		if(options.unselect) {
-			if(name && name.substring(-2, 2).indexOf('[]') === 0) {
-				name = name.substr(0, name.length - 2);
+			if(name && name.includes('[]')) {
+				name = name.substring(0, name.length - 2);
 			}
 			fragment.appendChild(this.hiddenInput(name, options.unselect));
 			delete options.unselect;
