@@ -146,9 +146,7 @@ export class Html {
 			action = action.substring(0, queryParamPos);
 		}
 
-		options.action = action;
-		options.method = method;
-		return this.tag('form', hiddenInputs);
+		return this.tag('form', hiddenInputs, Object.assign({}, options, {action, method}));
 	}
 
 	/**
