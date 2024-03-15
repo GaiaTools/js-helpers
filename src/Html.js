@@ -469,7 +469,7 @@ export class Html {
 			element.appendChild(content);
 		}
 		else if(typeof content === 'string') {
-			element.innerHTML = content;
+			element.textContent = content;
 		}
 	}
 
