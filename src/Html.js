@@ -421,6 +421,7 @@ export class Html {
 	 * @param {string} options.label - A label displayed next to the checkbox that is not HTML-encoded
 	 * The label wraps around the checkbox
 	 * @param {string} options.labelOptions - An array of HTML attributes for the label tag.
+	 * @param {string} options.form - The form ID that the input element belongs to
 	 * This is useless if you have not set the label property
 	 * @returns {DocumentFragment|HTMLElement} - The generated input elements
 	 */
@@ -691,6 +692,7 @@ export class Html {
 
 	/**
 	 * Sets the HTML element attributes
+	 *
 	 * Attributes that are null or false will not be set
 	 * 
 	 * @param {HTMLElement} element - The element to add attributes to
