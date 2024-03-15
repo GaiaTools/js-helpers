@@ -54,9 +54,8 @@ export class Html {
 	 * Encode HTML characters
 	 * 
 	 * @param {string} content - The string to encode
-	 * @param {boolean} doubleEncode - Whether to double encode
 	 */
-	static encode(content, doubleEncode = true) {
+	static encode(content) {
 		return encodeHTML(content);
 	}
 
