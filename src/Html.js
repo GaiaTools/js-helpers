@@ -323,27 +323,90 @@ export class Html {
 	}
 
 	/**
-	 * Generates a radio button input
-	 * 
-	 * @param {string} name - The name attribute value of the radio
-	 * @param {boolean} checked - Whether the radio is checked
-	 * @param {Object} options - A name/value list of attributes to add to the element
-	 * @returns {HtmlElement} - A generated input field
+	 * Generates a radio button input with an optional label.
+	 *
+	 * @param {string} name - The name attribute value of the radio button.
+	 * @param {boolean} checked - Whether the radio button is checked.
+	 * @param {Object} options - A name/value list of attributes to add to the element.
+	 * @param {string} options.value - The value attribute of the radio button. Defaults to '1'.
+	 * @param {Object} options.labelOptions - A name/value list of attributes to add to the label element, if created.
+	 * @param {string} options.label - The text for the label. If provided, a label element is created.
+	 * @param {boolean} options.encode - Whether to HTML-encode the label text. Defaults to true.
+	 * @returns {HTMLElement} - The generated radio button element, optionally wrapped in a label.
 	 */
 	static radio(name, checked = false, options = {}) {
-		return this.booleanInput('radio', name, checked, options);
+		const radioOptions = {
+			type: 'radio',
+			name: name,
+			checked: checked,
+			value: options.value || '1'
+		};
+
+		// Create the radio input element
+		const radioElement = this.input('radio', name, radioOptions.value, radioOptions);
+
+		if (options.label) {
+			// Create and configure the label element
+			const labelElement = document.createElement('label');
+			labelElement.appendChild(radioElement);
+
+			// Add the text node to the label, encoding it if necessary
+			const labelText = options.encode !== false ? this.encode(options.label) : options.label;
+			labelElement.appendChild(document.createTextNode(' ' + labelText));
+
+			// Apply any label-specific options if provided
+			if (options.labelOptions) {
+				this.setAttributes(labelElement, options.labelOptions);
+			}
+
+			return labelElement;
+		}
+
+		return radioElement;
 	}
 
+
 	/**
-	 * Generates a checkbox button input
-	 * 
-	 * @param {string} name - The name attribute value of the checkbox
-	 * @param {boolean} checked - Whether the checkbox is checked
-	 * @param {Object} options - A name/value list of attributes to add to the element
-	 * @returns {DocumentFragment|HTMLElement} - A generated input field
+	 * Generates a checkbox input with an optional label.
+	 *
+	 * @param {string} name - The name attribute value of the checkbox.
+	 * @param {boolean} checked - Whether the checkbox is checked.
+	 * @param {Object} options - A name/value list of attributes to add to the element.
+	 * @param {string} options.value - The value attribute of the checkbox. Defaults to '1'.
+	 * @param {Object} options.labelOptions - A name/value list of attributes to add to the label element, if created.
+	 * @param {string} options.label - The text for the label. If provided, a label element is created.
+	 * @param {boolean} options.encode - Whether to HTML-encode the label text. Defaults to true.
+	 * @returns {HTMLElement} - The generated checkbox element, optionally wrapped in a label.
 	 */
 	static checkbox(name, checked = false, options = {}) {
-		return this.booleanInput('checkbox', name, checked, options);
+		const checkboxOptions = {
+			type: 'checkbox',
+			name: name,
+			checked: checked,
+			value: options.value || '1'
+		};
+
+		// Create the checkbox input element
+		const checkboxElement = this.input('checkbox', name, checkboxOptions.value, checkboxOptions);
+
+		if (options.label) {
+			// Create and configure the label element
+			const labelElement = document.createElement('label');
+			labelElement.appendChild(checkboxElement);
+
+			// Add the text node to the label, encoding it if necessary
+			const labelText = options.encode !== false ? this.encode(options.label) : options.label;
+			labelElement.appendChild(document.createTextNode(' ' + labelText));
+
+			// Apply any label-specific options if provided
+			if (options.labelOptions) {
+				this.setAttributes(labelElement, options.labelOptions);
+			}
+
+			return labelElement;
+		}
+
+		return checkboxElement;
 	}
 
 	/**
@@ -482,52 +545,34 @@ export class Html {
 	 * @returns {DocumentFragment} - The list of checkboxes to return
 	 */
 	static checkboxList(name, selection = null, items = {}, options = {}) {
-		if(name.substr(-2) !== '[]') {
-			name += '[]';
-		}
-		if(Array.isArray(selection)) {
-			selection = selection.map(value => value.toString());
-		}
+		const fragment = document.createDocumentFragment();
+		const encode = options.encode !== false;
+		const selectedValues = new Set(Array.isArray(selection) ? selection.map(String) : [String(selection)]);
 
-		let formatter = ObjectHelper.remove(options, 'item');
-		let itemOptions = ObjectHelper.remove(options, 'itemOptions', {});
-		let encode = ObjectHelper.remove(options, 'encode', true);
-		let separator = this.text(ObjectHelper.remove(options, 'separator', '\n'));
-		let tag = ObjectHelper.remove(options, 'tag', 'div');
+		Object.entries(items).forEach(([value, label], index) => {
+			// Determine if the current checkbox should be checked
+			const isChecked = selectedValues.has(value);
+			// Generate the checkbox with a label if specified in options
+			const checkboxElement = this.checkbox(name, isChecked, {
+				value: value,
+				label: label,
+				encode: encode,
+				...options.itemOptions // Spread any additional specific item options
+			});
+			fragment.appendChild(checkboxElement);
 
-		let fragment = new DocumentFragment;
-		let index = 0;
-
-		// `value` in this context is the checkbox value, not the object property value
-		for(let value in items) {
-			let label = items[value];
-			let checked = selection !== null && (value === selection || Array.isArray(selection) && selection.includes(value));
-			if(formatter !== null) {
-				fragment.appendChild(formatter(index, label, checked, name, value));
+			// Optionally add a separator if specified
+			if (options.separator && index < Object.keys(items).length - 1) {
+				fragment.appendChild(this.text(options.separator));
 			}
-			else {
-				fragment.appendChild(this.checkbox(name, checked, ObjectHelper.merge(itemOptions, {
-					value: value, 
-					label: encode ? this.encode(label) : label
-				})));
-			}
-			index++;
+		});
 
-			fragment.appendChild(separator.cloneNode());
+		// Add a hidden input for unselected state if specified
+		if (options.unselect) {
+			fragment.insertBefore(this.hiddenInput(name, options.unselect), fragment.firstChild);
 		}
 
-		if(options.hasOwnProperty('unselect')) {
-			let name = name.substr(0, name.length - 2) === '[]' ? name.substr(0, -2) : name;
-			let hidden = this.hiddenInput(name, options['unselect']);
-			delete options.unselect;
-			fragment.appendChild(hidden);
-		}
-
-		if(tag === false) {
-			return fragment;
-		}
-
-		return this.tag(tag, fragment, options);
+		return fragment;
 	}
 
 	/**
@@ -550,50 +595,34 @@ export class Html {
 	 * @returns {DocumentFragment} - The list of radio to return
 	 */
 	static radioList(name, selection = null, items = {}, options = {}) {
-		if(Array.isArray(selection)) {
-			selection = selection.map(value => value.toString());
-		}
+		const fragment = document.createDocumentFragment();
+		const encode = options.encode !== false;
+		const selectedValue = String(selection);
 
-		let formatter = ObjectHelper.remove(options, 'item');
-		let itemOptions = ObjectHelper.remove(options, 'itemOptions', {});
-		let encode = ObjectHelper.remove(options, 'encode', true);
-		let separator = DomParser.getNodes(ObjectHelper.remove(options, 'separator', '')).item(0);
-		let tag = ObjectHelper.remove(options, 'tag', 'div');
+		Object.entries(items).forEach(([value, label], index) => {
+			// Determine if the current radio button should be checked
+			const isChecked = value === selectedValue;
+			// Generate the radio button with a label if specified in options
+			const radioElement = this.radio(name, isChecked, {
+				value: value,
+				label: label,
+				encode: encode,
+				...options.itemOptions // Spread any additional specific item options
+			});
+			fragment.appendChild(radioElement);
 
-		let fragment = new DocumentFragment;
-		let index = 0;
-
-		if(options.hasOwnProperty('unselect')) {
-			let hidden = this.hiddenInput(name, options['unselect']);
-			delete options.unselect;
-			fragment.appendChild(hidden);
-		}
-
-		// `value` in this context is the checkbox value, not the object property value
-		for(let value in items) {
-			let label = items[value];
-			let checked = selection !== null && value === selection;
-			if(formatter !== null) {
-				fragment.appendChild(formatter(index, label, checked, name, value));
+			// Optionally add a separator if specified
+			if (options.separator && index < Object.keys(items).length - 1) {
+				fragment.appendChild(this.text(options.separator));
 			}
-			else {
-				fragment.appendChild(this.radio(name, checked, ObjectHelper.merge(itemOptions, {
-					value: value, 
-					label: encode ? this.encode(label) : label
-				})));
-			}
-			index++;
+		});
 
-			if(separator) {
-				fragment.appendChild(separator.cloneNode());
-			}
+		// Add a hidden input for unselected state if specified
+		if (options.unselect) {
+			fragment.insertBefore(this.hiddenInput(name, options.unselect), fragment.firstChild);
 		}
 
-		if(tag === false) {
-			return fragment;
-		}
-
-		return this.tag(tag, fragment, options);
+		return fragment;
 	}
 
 	/**
