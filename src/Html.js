@@ -25,7 +25,7 @@ import {DomParser} from './DomParser';
 /**
  * @var {Array} - A list of elements that do not allow for inner HTML
  */
-let emptyElements = [
+let voidElements = [
 	'area',
 	'base',
 	'br',
@@ -83,7 +83,7 @@ export class Html {
 	static tag(name, content, options = {}) {
 		let element = document.createElement(name);
 		this.setAttributes(element, options);
-		if(!emptyElements.includes(name)) {
+		if(!voidElements.includes(name)) {
 			this.renderContent(element, content);
 		}
 
