@@ -1,6 +1,3 @@
-import {isEmpty} from 'lodash';
-import {ObjectHelper} from './ObjectHelper';
-import {DomParser} from './DomParser';
 import {encodeHTML} from 'entities';
 
 /**
