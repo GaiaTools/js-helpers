@@ -1,9 +1,10 @@
 export {DomParser} from './DomParser';
 export {ObjectHelper} from './ObjectHelper';
 
+
 // Auto-generated exports for Html
 export {
-  tag,
+  createElement,
   a,
   img,
   form,

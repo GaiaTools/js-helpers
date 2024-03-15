@@ -53,7 +53,7 @@ const booleanAttributes = ['required', 'readonly', 'disabled', 'checked'];
  * @see renderContent
  * @see setAttributes
  */
-export function tag(name, content, options = {}) {
+export function createElement(name, content, options = {}) {
 	const element = document.createElement(name);
 	setAttributes(element, options);
 	if(!voidElements.includes(name)) {
@@ -77,14 +77,14 @@ export function tag(name, content, options = {}) {
  * @param {string} url - A path used to create the URL
  * @param {Object} options - A name/value list of attributes to add to the element
  * @returns {HTMLElement} - A complete anchor element
- * @see tag
+ * @see createTag
  */
 export function a(text, url, options = {}) {
 	if(url !== null) {
 		options.href = url;
 	}
 
-	return tag('a', text, options);
+	return createTag('a', text, options);
 }
 
 /**
@@ -93,12 +93,12 @@ export function a(text, url, options = {}) {
  * @param {string} src - An image URI to be set as the image source
  * @param {Object} options - A name/value list of attributes to add to the element
  * @returns {HTMLElement} - A complete image element
- * @see tag
+ * @see createTag
  */
 export function img(src, options = {}) {
 	options.src = src;
 
-	return tag('img', null, options);
+	return createTag('img', null, options);
 }
 
 /**
@@ -119,7 +119,7 @@ export function form(action = '', method = 'post', options = {}) {
 		action = action.substring(0, queryParamPos);
 	}
 
-	return tag('form', hiddenInputs, {...options, action, method});
+	return createTag('form', hiddenInputs, {...options, action, method});
 }
 
 /**
@@ -134,7 +134,7 @@ export function label(content, target = null, options = {}) {
 		options.for = target;
 	}
 
-	return tag('label', content, options);
+	return createTag('label', content, options);
 }
 
 /**
@@ -148,7 +148,7 @@ export function button(content, options = {}) {
 		options.type = 'button';
 	}
 
-	return tag('button', content, options);
+	return createTag('button', content, options);
 }
 
 /**
@@ -189,7 +189,7 @@ export function input(type, name, value, options = {}) {
 	options.name = name;
 	options.value = value;
 
-	return tag('input', null, options);
+	return createTag('input', null, options);
 }
 
 /**
@@ -203,7 +203,7 @@ export function buttonInput(label = 'Button', options = {}) {
 	options.type = 'button';
 	options.value = label;
 
-	return tag('input', null, options);
+	return createTag('input', null, options);
 }
 
 /**
@@ -217,7 +217,7 @@ export function submitInput(label = 'Submit', options = {}) {
 	options.type = 'submit';
 	options.value = label;
 
-	return tag('input', null, options);
+	return createTag('input', null, options);
 }
 
 /**
@@ -231,7 +231,7 @@ export function resetInput(label = 'Reset', options = {}) {
 	options.type = 'reset';
 	options.value = label;
 
-	return tag('input', null, options);
+	return createTag('input', null, options);
 }
 
 /**
@@ -292,7 +292,7 @@ export function fileInput(name, value = null, options = {}) {
  */
 export function textarea(name, value = '', options = {}) {
 	options.name = name;
-	return tag('textarea', value, options);
+	return createTag('textarea', value, options);
 }
 
 /**
@@ -396,7 +396,7 @@ export function select(name, selection = null, items = {}, options = {}) {
 
 	options.name = name;
 	const selectOptions = renderSelectOptions(selection, items);
-	return tag('select', selectOptions, options);
+	return createTag('select', selectOptions, options);
 }
 
 /**
@@ -423,7 +423,7 @@ export function listBox(name, selection = null, items = {}, options = {}) {
 	}
 
 	const selectOptions = renderSelectOptions(selection, items);
-	fragment.appendChild(tag('select', selectOptions, options));
+	fragment.appendChild(createTag('select', selectOptions, options));
 	return fragment;
 }
 
@@ -558,7 +558,7 @@ export function ul(items, options = {}) {
 		fragment.appendChild(li);
 	});
 
-	return tag(tagOption, fragment, options);
+	return createTag(tagOption, fragment, options);
 }
 
 /**
