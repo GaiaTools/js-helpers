@@ -29,30 +29,27 @@ export class ObjectHelper {
      * // returns {message: greeing: 'Hello', subject: 'Doggo'}
      */
 	static merge(target, ...sources) {
-		if(!this.isObject(target)) {
-			// throw new InvalidArgumentError('Target is not an object');
-			throw new Error('Target is not an object');
+		if (!this.isObject(target)) {
+			throw new Error('Target must be an object');
 		}
 
-		if(!sources.length) {
-			return target;
-		}
-		const source = sources.shift();
-    
-		if (this.isObject(target) && this.isObject(source)) {
-			for (const key in source) {
-				if (this.isObject(source[key])) {
-					if (!target[key]) {
-						Object.assign(target, {[key]: {}});
+		sources.forEach(source => {
+			if (this.isObject(source)) {
+				Object.keys(source).forEach(key => {
+					const srcValue = source[key];
+					if (this.isObject(srcValue)) {
+						if (!target[key] || !this.isObject(target[key])) {
+							target[key] = {};
+						}
+						this.merge(target[key], srcValue);
+					} else {
+						target[key] = srcValue;
 					}
-					this.merge(target[key], source[key]);
-				} else {
-					Object.assign(target, {[key]: source[key]});
-				}
+				});
 			}
-		}
-    
-		return this.merge(target, ...sources);
+		});
+
+		return target;
 	}
 
 	/**
