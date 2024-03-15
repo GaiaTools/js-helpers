@@ -70,7 +70,7 @@ export class ObjectHelper {
 
 	/**
 	 * 
-	 * @param {Ojbect} item - The object to count the properties
+	 * @param {Object} item - The object to count the properties
 	 */
 	static count(item) {
 		return Object.keys(item).length;
