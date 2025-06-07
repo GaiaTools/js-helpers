@@ -53,11 +53,17 @@ export class ObjectHelper {
 	}
 
 	/**
+	 * Removes a property from an object and returns its value
 	 * 
 	 * @param {Object} target - The object to extract the value from
-	 * @param {string} property - The name of the property
-	 * @param {string|null} defaultValue - The default value to be returned if the property does not exist
-	 * @returns {*|null} - The value of the property, or the default value
+	 * @param {string} property - The name of the property to remove
+	 * @param {*} defaultValue - The default value to be returned if the property does not exist
+	 * @returns {*} - The value of the property, or the default value
+	 * 
+	 * @example
+	 * var obj = {name: 'John', age: 30};
+	 * var age = ObjectHelper.remove(obj, 'age');
+	 * // age = 30, obj = {name: 'John'}
 	 */
 	static remove(target, property, defaultValue = undefined) {
 		if (this.isObject(target) && Object.hasOwnProperty.call(target, property)) {
@@ -69,8 +75,15 @@ export class ObjectHelper {
 	}
 
 	/**
+	 * Counts the number of properties in an object
 	 * 
 	 * @param {Object} item - The object to count the properties
+	 * @returns {number} - The number of properties in the object
+	 * 
+	 * @example
+	 * var obj = {name: 'John', age: 30, city: 'New York'};
+	 * ObjectHelper.count(obj);
+	 * // returns 3
 	 */
 	static count(item) {
 		return Object.keys(item).length;

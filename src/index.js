@@ -1,3 +1,12 @@
+/**
+ * Main entry point for the js-helpers library
+ * 
+ * This file exports all the helper functions and classes from the library,
+ * making them available to consumers of the package.
+ * 
+ * @module js-helpers
+ */
+
 export {DomParser} from './DomParser';
 export {ObjectHelper} from './ObjectHelper';
 
