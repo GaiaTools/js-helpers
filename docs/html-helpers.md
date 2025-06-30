@@ -36,6 +36,14 @@ This document provides detailed information about all the HTML helper functions 
 - [List Elements](#list-elements)
   - [ul](#ul)
   - [ol](#ol)
+- [Table Elements](#table-elements)
+  - [table](#table)
+  - [tr](#tr)
+  - [td](#td)
+  - [th](#th)
+  - [thead](#thead)
+  - [tbody](#tbody)
+  - [tfoot](#tfoot)
 - [Utility Functions](#utility-functions)
   - [renderContent](#rendercontent)
   - [setAttributes](#setattributes)
@@ -676,6 +684,152 @@ ol(items, options = {})
 **Example:**
 ```javascript
 const steps = ol(['Mix ingredients', 'Pour into pan', 'Bake for 30 minutes'], { class: 'recipe-steps' });
+```
+
+## Table Elements
+
+### table
+
+Generates a table element.
+
+```javascript
+table(content, options = {})
+```
+
+**Parameters:**
+- `content` (HTMLElement|HTMLElement[]|DocumentFragment|string): The content to be placed inside the table
+- `options` (Object): A name/value list of attributes to add to the element
+
+**Returns:**
+- (HTMLElement): The generated table element
+
+**Example:**
+```javascript
+const tableEl = table(tbody, { class: 'data-table', id: 'user-table' });
+```
+
+### tr
+
+Generates a table row element.
+
+```javascript
+tr(content, options = {})
+```
+
+**Parameters:**
+- `content` (HTMLElement|HTMLElement[]|DocumentFragment|string): The content to be placed inside the row
+- `options` (Object): A name/value list of attributes to add to the element
+
+**Returns:**
+- (HTMLElement): The generated table row element
+
+**Example:**
+```javascript
+const rowEl = tr([td('John'), td('Doe'), td('30')], { class: 'user-row' });
+```
+
+### td
+
+Generates a table cell element.
+
+```javascript
+td(content, options = {})
+```
+
+**Parameters:**
+- `content` (HTMLElement|HTMLElement[]|DocumentFragment|string): The content to be placed inside the cell
+- `options` (Object): A name/value list of attributes to add to the element
+
+**Returns:**
+- (HTMLElement): The generated table cell element
+
+**Example:**
+```javascript
+const cellEl = td('Cell content', { class: 'data-cell', colspan: '2' });
+```
+
+### th
+
+Generates a table header cell element.
+
+```javascript
+th(content, options = {})
+```
+
+**Parameters:**
+- `content` (HTMLElement|HTMLElement[]|DocumentFragment|string): The content to be placed inside the header cell
+- `options` (Object): A name/value list of attributes to add to the element
+
+**Returns:**
+- (HTMLElement): The generated table header cell element
+
+**Example:**
+```javascript
+const headerCellEl = th('Name', { class: 'header-cell', scope: 'col' });
+```
+
+### thead
+
+Generates a table header section element.
+
+```javascript
+thead(content, options = {})
+```
+
+**Parameters:**
+- `content` (HTMLElement|HTMLElement[]|DocumentFragment|string): The content to be placed inside the header section
+- `options` (Object): A name/value list of attributes to add to the element
+
+**Returns:**
+- (HTMLElement): The generated table header section element
+
+**Example:**
+```javascript
+const headerRow = tr([th('Name'), th('Email'), th('Age')]);
+const theadEl = thead(headerRow, { class: 'table-header' });
+```
+
+### tbody
+
+Generates a table body section element.
+
+```javascript
+tbody(content, options = {})
+```
+
+**Parameters:**
+- `content` (HTMLElement|HTMLElement[]|DocumentFragment|string): The content to be placed inside the body section
+- `options` (Object): A name/value list of attributes to add to the element
+
+**Returns:**
+- (HTMLElement): The generated table body section element
+
+**Example:**
+```javascript
+const row1 = tr([td('John'), td('john@example.com'), td('30')]);
+const row2 = tr([td('Jane'), td('jane@example.com'), td('25')]);
+const tbodyEl = tbody([row1, row2], { class: 'table-body' });
+```
+
+### tfoot
+
+Generates a table footer section element.
+
+```javascript
+tfoot(content, options = {})
+```
+
+**Parameters:**
+- `content` (HTMLElement|HTMLElement[]|DocumentFragment|string): The content to be placed inside the footer section
+- `options` (Object): A name/value list of attributes to add to the element
+
+**Returns:**
+- (HTMLElement): The generated table footer section element
+
+**Example:**
+```javascript
+const footerRow = tr(td('Total: 2 users', { colspan: '3' }));
+const tfootEl = tfoot(footerRow, { class: 'table-footer' });
 ```
 
 ## Utility Functions
