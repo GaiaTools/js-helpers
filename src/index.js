@@ -44,5 +44,12 @@ export {
   text,
   setAttributes,
   addClass,
-  removeClass
+  removeClass,
+  table,
+  tr,
+  td,
+  th,
+  thead,
+  tbody,
+  tfoot
 } from './Html';

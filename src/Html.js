@@ -638,3 +638,80 @@ export function removeClass(element, classList) {
 		element.classList.remove(...classList);
 	}
 }
+
+/**
+ * Generates a table element
+ *
+ * @param {HTMLElement|HTMLElement[]|DocumentFragment|string} content - The content to be placed inside the table
+ * @param {Object} options - A name/value list of attributes to add to the element
+ * @returns {HTMLElement} - The generated table element
+ */
+export function table(content, options = {}) {
+	return createElement('table', content, options);
+}
+
+/**
+ * Generates a table row element
+ *
+ * @param {HTMLElement|HTMLElement[]|DocumentFragment|string} content - The content to be placed inside the row
+ * @param {Object} options - A name/value list of attributes to add to the element
+ * @returns {HTMLElement} - The generated table row element
+ */
+export function tr(content, options = {}) {
+	return createElement('tr', content, options);
+}
+
+/**
+ * Generates a table cell element
+ *
+ * @param {HTMLElement|HTMLElement[]|DocumentFragment|string} content - The content to be placed inside the cell
+ * @param {Object} options - A name/value list of attributes to add to the element
+ * @returns {HTMLElement} - The generated table cell element
+ */
+export function td(content, options = {}) {
+	return createElement('td', content, options);
+}
+
+/**
+ * Generates a table header cell element
+ *
+ * @param {HTMLElement|HTMLElement[]|DocumentFragment|string} content - The content to be placed inside the header cell
+ * @param {Object} options - A name/value list of attributes to add to the element
+ * @returns {HTMLElement} - The generated table header cell element
+ */
+export function th(content, options = {}) {
+	return createElement('th', content, options);
+}
+
+/**
+ * Generates a table header section element
+ *
+ * @param {HTMLElement|HTMLElement[]|DocumentFragment|string} content - The content to be placed inside the header section
+ * @param {Object} options - A name/value list of attributes to add to the element
+ * @returns {HTMLElement} - The generated table header section element
+ */
+export function thead(content, options = {}) {
+	return createElement('thead', content, options);
+}
+
+/**
+ * Generates a table body section element
+ *
+ * @param {HTMLElement|HTMLElement[]|DocumentFragment|string} content - The content to be placed inside the body section
+ * @param {Object} options - A name/value list of attributes to add to the element
+ * @returns {HTMLElement} - The generated table body section element
+ */
+export function tbody(content, options = {}) {
+	return createElement('tbody', content, options);
+}
+
+/**
+ * Generates a table footer section element
+ *
+ * @param {HTMLElement|HTMLElement[]|DocumentFragment|string} content - The content to be placed inside the footer section
+ * @param {Object} options - A name/value list of attributes to add to the element
+ * @returns {HTMLElement} - The generated table footer section element
+ */
+export function tfoot(content, options = {}) {
+	return createElement('tfoot', content, options);
+}
