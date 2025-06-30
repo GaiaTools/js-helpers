@@ -615,19 +615,26 @@ export function setAttributes(element, attributes = {}) {
  * Add class names to an element
  *
  * @param {HTMLElement} element - The element to modify
- * @param {string[]} classList - An array of class names to add to the element
+ * @param {string|string[]} classList - A class name or an array of class names to add to the element
  */
 export function addClass(element, classList) {
-	element.classList.add(...classList);
+	if (typeof classList === 'string') {
+		element.classList.add(classList);
+	} else if (Array.isArray(classList)) {
+		element.classList.add(...classList);
+	}
 }
 
 /**
  * Remove class names from an element
  *
  * @param {HTMLElement} element - The element to modify
- * @param {string[]} classList - An array of class names to remove from the element
+ * @param {string|string[]} classList - A class name or an array of class names to remove from the element
  */
 export function removeClass(element, classList) {
-	element.classList.remove(...classList);
+	if (typeof classList === 'string') {
+		element.classList.remove(classList);
+	} else if (Array.isArray(classList)) {
+		element.classList.remove(...classList);
+	}
 }
-
